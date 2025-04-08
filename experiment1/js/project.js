@@ -2,7 +2,6 @@
 // Author: Scott Miller
 // Date: 4-7-2025
 
-// Recipe Generator Class
 class RecipeGenerator {
   constructor() {
     this.fillers = {
