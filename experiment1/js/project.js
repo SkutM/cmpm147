@@ -17,16 +17,16 @@ class RecipeGenerator {
     };
 
     this.template = `
-$chef, $intro for the art of cooking.
+<p>$chef, $intro for the art of cooking.</p>
 
-Step 1: Take your $utensil and $action the $ingredient.
+<p>Step 1: Take your $utensil and $action the $ingredient.</p>
 
-Step 2: Add some $ingredient to the mix, then let it sit for $time.
+<p>Step 2: Add some $ingredient to the mix, then let it sit for $time.</p>
 
-Step 3: Finally, put your $dish on a plate and get ready to eat!
+<p>Step 3: Finally, put your $dish on a plate and get ready to eat!</p>
 
-Outcome? Expect $outcome. Bon appetit (...right)?
-    `;
+<p>Outcome? Expect $outcome. Bon appetit (...right)?</p>
+`;
   }
 
   replacer(match, name) {
@@ -44,7 +44,7 @@ Outcome? Expect $outcome. Bon appetit (...right)?
       story = story.replace(slotPattern, match => this.replacer(match, match.slice(1)));
     }
 
-    $("#box").text(story);
+    $("#box").html(story);
   }
 }
 
