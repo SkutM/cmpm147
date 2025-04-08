@@ -1,34 +1,57 @@
-// project.js - purpose and description here
-// Author: Your Name
-// Date:
+// project.js - A generative recipe machine
+// Author: Scott Miller
+// Date: 4-7-2025
 
-// NOTE: This is how we might start a basic JavaaScript OOP project
+// Recipe Generator Class
+class RecipeGenerator {
+  constructor() {
+    this.fillers = {
+      chef: ["Chef", "Food Person", "Soup Master", "Food Lord", "Culinary Beast", "Fool", "Yo, you"],
+      intro: ["listen here", "brace yourself", "take notes", "ignore all instincts and prepare"],
+      utensil: ["spatula", "cauldron", "plastic fork", "blender", "whisk", "bare hands", "tiny spoon"],
+      ingredient: ["onion", "banana", "pickle juice", "instant ramen", "ketchup", "meat of some kind", "sawdust", "marshmallow fluff", "protein powder", "expired yogurt"],
+      action: ["smoosh", "gently massage", "incinerate", "destroy", "politely mix", "stare at", "overcook", "dance with", "sit on"],
+      dish: ["casserole", "stew", "breakfast taco", "smoothie", "suspicious pie", "pizza", "lasagna"],
+      time: ["2 minutes", "an hour", "exactly 42 seconds", "... however long you feel like it", "a day"],
+      outcome: ["instant regret", "wonderful tastes", "a new favorite dish", "an explosion", "a trip to the ER", "happiness"]
+    };
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
+    this.template = `
+$chef, $intro for the art of cooking.
 
-// define a class
-class MyProjectClass {
-  // constructor function
-  constructor(param1, param2) {
-    // set properties using 'this' keyword
-    this.property1 = param1;
-    this.property2 = param2;
+Step 1: Take your $utensil and $action the $ingredient.
+
+Step 2: Add some $ingredient to the mix, then let it sit for $time.
+
+Step 3: Finally, put your $dish on a plate and get ready to eat!
+
+Outcome? Expect $outcome. Bon appetit (...right)?
+    `;
   }
-  
-  // define a method
-  myMethod() {
-    // code to run when method is called
+
+  replacer(match, name) {
+    const options = this.fillers[name];
+    return options
+      ? options[Math.floor(Math.random() * options.length)]
+      : `<UNKNOWN:${name}>`;
+  }
+
+  generate() {
+    const slotPattern = /\$(\w+)/;
+    let story = this.template;
+
+    while (story.match(slotPattern)) {
+      story = story.replace(slotPattern, match => this.replacer(match, match.slice(1)));
+    }
+
+    $("#box").text(story);
   }
 }
 
 function main() {
-  // create an instance of the class
-  let myInstance = new MyProjectClass("value1", "value2");
-
-  // call a method on the instance
-  myInstance.myMethod();
+  const generator = new RecipeGenerator();
+  $("#clicker").click(() => generator.generate());
+  generator.generate();
 }
 
-// let's get this party started - uncomment me
-//main();
+main();
