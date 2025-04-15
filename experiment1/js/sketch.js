@@ -35,15 +35,25 @@ function drawFish(x, y, size, faceLeft) {
 
 
 function setup() {
-  createCanvas(400, 200);
+  canvasContainer = $("#canvas-container");
+
+  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  canvas.parent("canvas-container");
 
   // colors for defined, https://htmlcolorcodes.com/
   waterTop = color('#69ade4');
   bottom = color('#015F70');
   seafloor = color('#c2b280');
 
-  createButton("new fish").mousePressed(() => seed++);
+  $("#new-fish").click(() => {
+    seed++;
+  });
+
+  $(window).resize(() => {
+    resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  });
 }
+
 
 function draw() {
   randomSeed(seed);
