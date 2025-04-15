@@ -1,79 +1,134 @@
 // sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+// Author: Scott Miller
+// Date: 4/14/2025
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+// needed for two fnctions
+let waterTop, bottom, seafloor, canvasContainer;
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
+// seeed
+let seed = 0;
 
-// Globals
-let myInstance;
-let canvasContainer;
-var centerHorz, centerVert;
+function drawFish(x, y, size, faceLeft) {
+  // push saves settings, pop restores. b4 & after
+  push();
+  translate(x, y);
+  // if facing left, flip!
+  scale(faceLeft ? -1 : 1, 1);
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
+  // orange, body
+  fill('#FDB813');
+  ellipse(0, 0, size * 2, size);
 
-    myMethod() {
-        // code to run when method is called
-    }
-}
+  // dark orange, tail
+  fill('#FF7F50');
+  // triangle(x1, y1, x2, y2, x3, y3); (for reference)
+  triangle(-size, 0, -size - size / 2, -size / 2, -size - size / 2, size / 2);
 
-function resizeScreen() {
-  centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
-  centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
-  console.log("Resizing...");
-  resizeCanvas(canvasContainer.width(), canvasContainer.height());
-  // redrawCanvas(); // Redraw everything based on new size
-}
-
-// setup() function is called once when the program starts
-function setup() {
-  // place our canvas, making it fit our container
-  canvasContainer = $("#canvas-container");
-  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-  canvas.parent("canvas-container");
-  // resize canvas is the page is resized
-
-  // create an instance of the class
-  myInstance = new MyClass("VALUE1", "VALUE2");
-
-  $(window).resize(function() {
-    resizeScreen();
-  });
-  resizeScreen();
-}
-
-// draw() function is called repeatedly, it's the main animation loop
-function draw() {
-  background(220);    
-  // call a method on the instance
-  myInstance.myMethod();
-
-  // Set up rotation for the rectangle
-  push(); // Save the current drawing context
-  translate(centerHorz, centerVert); // Move the origin to the rectangle's center
-  rotate(frameCount / 100.0); // Rotate by frameCount to animate the rotation
-  fill(234, 31, 81);
-  noStroke();
-  rect(-125, -125, 250, 250); // Draw the rectangle centered on the new origin
-  pop(); // Restore the original drawing context
-
-  // The text is not affected by the translate and rotate
+  // eye
   fill(255);
-  textStyle(BOLD);
-  textSize(140);
-  text("p5*", centerHorz - 105, centerVert + 40);
+  ellipse(size / 2, -size / 6, size / 3, size / 3);
+  fill(0);
+  ellipse(size / 2, -size / 6, size / 6, size / 6);
+
+  pop();
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+function setup() {
+  canvasContainer = $("#canvas-container");
+
+  let w = canvasContainer.width() || 400;
+  let h = canvasContainer.height() || 200;
+  let canvas = createCanvas(w, h);
+  canvas.parent("canvas-container");
+
+  // colors for defined, https://htmlcolorcodes.com/
+  waterTop = color('#69ade4');
+  bottom = color('#015F70');
+  seafloor = color('#c2b280');
+
+  $("#new-fish").click(() => {
+    seed++;
+  });
+
+  $(window).resize(() => {
+    resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  });
+}
+
+
+function draw() {
+  randomSeed(seed);
+
+  // call gradient fnct for water depth, see bottom of code
+  gradient();
+
+  // ocean floor!
+  fill(seafloor);
+  noStroke();
+  beginShape();
+  vertex(0, height);
+  const steps = 10;
+  for (let i = 0; i <= steps; i++) {
+    let x = (width * i) / steps;
+    // random, checklist:
+    // start at bottom of canvas (check)
+    // move up for hills (check)
+    // more random * = less sporatic, 3 or 4 (check)
+    let y = height - random() * random() * random() * (height / 3) - height / 50;
+    vertex(x, y);
+  }
+  vertex(width, height); // took me years. do not comment this out
+  endShape(CLOSE);
+
+  // bubbles
+  noStroke();
+  const bubbles = 20;
+  for (let i = 0; i < bubbles; i++) {
+    let z = random(0.5, 1.5);  // depth factor
+    
+    // from example
+    let x = width * ((random() + (mouseX / 1000 + millis() / 100000.0) / z) % 1);
+    
+    // float up
+    let ogY = height - random() * height;
+    // https://p5js.org/reference/p5/millis/ I really like this! reference
+    let upY = (ogY - (millis() / 30) % height + height) % height;
+
+    let s = random(4, 10) / z; // size +- with depth
+    // get rid of orange color, transparent+random
+    fill(255, 255, 255, 100 + 50 * random());
+    ellipse(x, upY, s, s);
+  }
+  
+    // ChatGPT start
+  const fishCount = 5;
+  for (let i = 0; i < fishCount; i++) {
+    let z = random(0.6, 1.5); // depth
+    let size = random(8, 16) / z;
+
+    let swimSpeed = 0.3 + random() * 0.5;
+    let offset = i * 1000;
+    let directionLeft = i % 2 === 0;
+    let x = directionLeft
+      ? width - ((millis() / (swimSpeed * 10) + offset) % (width + 100))
+      : (millis() / (swimSpeed * 10) + offset) % (width + 100) - 50;
+
+    let y = height * 0.3 + noise(i * 100 + millis() / 2000) * height * 0.4;
+
+    drawFish(x, y, size, directionLeft);
+  }
+    // end ChatGPT
+  
+}
+
+// easier in a different func, helper
+function gradient() {
+  // row by row draw lines
+  for (let y = 0; y < height; y++) {
+    //taken directly from CMPM169, inter & lerpColor
+    let inter = map(y, 0, height, 0, 1);
+    let c = lerpColor(waterTop, bottom, inter);
+    stroke(c);
+    line(0, y, width, y);
+  }
 }
