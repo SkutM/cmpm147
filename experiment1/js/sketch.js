@@ -33,11 +33,12 @@ function drawFish(x, y, size, faceLeft) {
   pop();
 }
 
-
 function setup() {
   canvasContainer = $("#canvas-container");
 
-  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  let w = canvasContainer.width() || 400;
+  let h = canvasContainer.height() || 200;
+  let canvas = createCanvas(w, h);
   canvas.parent("canvas-container");
 
   // colors for defined, https://htmlcolorcodes.com/
