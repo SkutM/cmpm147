@@ -3,7 +3,7 @@
 // Date: 4/14/2025
 
 // needed for two fnctions
-let waterTop, bottom, seafloor;
+let waterTop, bottom, seafloor, canvasContainer;
 
 // seeed
 let seed = 0;
