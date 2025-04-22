@@ -1,60 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Experiment X - Generative Overworld and Dungeon</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 3 - Generative Overworld and Dungeon</title>
   <link rel="stylesheet" href="../css/site.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
+  <script src="js/sketch.js" defer></script>
 </head>
 <body>
   <main id="content">
     <section>
-      <h1>Experiment X - Generative Overworld and Dungeon</h1>
+      <h1>Experiment 3 - Generative Overworld and Dungeon</h1>
 
       <div class="minor-section">
-		<div id="canvas-container" style="margin: 10px;">
-		  <!-- Canvas gets inserted here -->
-		</div>
-		<div class="fullscreen-box">
-		  <button id="fullscreen">Fullscreen</button>
-		</div>
-	  
-		<div style="margin: 10px;">
-		  <button id="reseedButton">Reseed</button>
-		  <span id="seedReport"></span>
-		</div>
-	  
-		<!-- 🛠️ Correctly closed textarea -->
-		<textarea id="asciiBox" cols="20" rows="20"
-		  style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;"></textarea>
-	  </div>
-	  
+        <div id="canvas-container" style="margin: 10px;"></div>
+        <div style="margin: 10px;">
+          <button id="reseedButton">Reseed</button>
+          <span id="seedReport"></span>
+        </div>
+        <textarea id="asciiBox" cols="20" rows="20"
+          style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;">
+        </textarea>
+      </div>
 
       <div class="minor-section">
         <h2>Description</h2>
-        <p>This experiment explores procedural worldbuilding using Perlin noise and random walk algorithms...</p>
+        <p>This experiment explores...</p>
       </div>
 
       <div class="minor-section">
         <h2>Technical</h2>
-        <p>...Tiles are drawn using a tileset...</p>
+        <p>How it works...</p>
       </div>
 
       <div class="minor-section">
         <h2>Reflection</h2>
-        <p>...I struggled a bit with the logic for drawing edge-based tiles...</p>
+        <p>Challenges and takeaways...</p>
       </div>
     </section>
+
     <nav id="links" class="minor-section">
       <ul>
         <li><a href="../index.html">Home</a></li>
       </ul>
     </nav>
   </main>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
-  <script src="./js/sketch.js"></script>
 </body>
 </html>
