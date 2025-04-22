@@ -14,7 +14,7 @@ let currentGrid = [];
 let numRows, numCols;
 
 function preload() {
-  tilesetImage = loadImage("../img/tilesetP8.png");
+  tilesetImage = loadImage("../../img/tilesetP8.png");
 }
 
 function reseed() {
