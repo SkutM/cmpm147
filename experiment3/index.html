@@ -1,67 +1,59 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Experiment X - Generative Overworld and Dungeon</title>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../css/site.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
-		<script src="./js/sketch.js" defer></script>
-	  </head>
+<head>
+  <title>Experiment X - Generative Overworld and Dungeon</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 <body>
-	<main id="content">
-		<section>
+  <main id="content">
+    <section>
+      <h1>Experiment X - Generative Overworld and Dungeon</h1>
 
-			<h1>Experiment X - Generative Overworld and Dungeon</h1>
+      <div class="minor-section">
+        <div id="canvas-container" style="margin: 10px;">
+          <!-- Canvas gets inserted here -->
+        </div>
+        <div class="fullscreen-box">
+          <button id="fullscreen">Fullscreen</button>
+        </div>
 
-			<div class="minor-section">
-				<div id="canvas-container" style="margin: 10px;">
-				  <!-- Canvas gets inserted here -->
-				</div>
-				<div class="fullscreen-box">
-				  <button id="fullscreen">Fullscreen</button>
-				</div>
-			  
-				<div style="margin: 10px;">
-				  <button id="reseedButton">Reseed</button>
-				  <span id="seedReport"></span>
-				</div>
-			  
-				<textarea id="asciiBox" cols="20" rows="20" 
-				  style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;">
-				</textarea>
-			  </div>
-			  
+        <div style="margin: 10px;">
+          <button id="reseedButton">Reseed</button>
+          <span id="seedReport"></span>
+        </div>
 
-			<div class="minor-section">
-				<h2>Description</h2>
-				<p>This experiment explores procedural worldbuilding using Perlin noise and random walk algorithms. The world can be toggled between two modes: a natural overworld and a dungeon interior. Each scene has its own generative logic, tileset, and decor logic for dynamic variation.</p>
-			</div>
+        <textarea id="asciiBox" cols="20" rows="20"
+          style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;">
+        </textarea>
+      </div>
 
-			<div class="minor-section">
-				<h2>Technical</h2>
-				<p>
-					The overworld is generated using Perlin noise to create smooth transitions between water and grass, with added randomized visual variety like trees and rocks. The dungeon uses a room-and-hallway algorithm: several rooms are randomly placed, and hallways are carved to connect their centers.
-					<br><br>
-					Tiles are drawn using a tileset, and decor (trees, doors, rocks, etc.) is layered with probabilities. Life is added to the world through subtle animations: water tiles shimmer over time using `millis()`, and trees shift slightly based on `mouseX`.
-				</p>
-			</div>
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>This experiment explores procedural worldbuilding using Perlin noise and random walk algorithms...</p>
+      </div>
 
-			<div class="minor-section">
-				<h2>Reflection</h2>
-				<p>
-					I struggled a bit with the logic for drawing edge-based tiles and making sure wall tiles only spawn doors when touching floor tiles. I also had to figure out how to introduce "life" with mouse or time interaction, which ended up being fun and not too hard using `sin(millis())` and `map(mouseX)`. The project helped me better understand procedural generation and how to work with 2D arrays to render complex tilemaps.
-				</p>
-			</div>
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>...Tiles are drawn using a tileset...</p>
+      </div>
 
-		</section>
-		<nav id="links" class="minor-section">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-			</ul>
-		</nav>
-	</main>
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>...I struggled a bit with the logic for drawing edge-based tiles...</p>
+      </div>
+    </section>
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
+  <script src="./js/sketch.js"></script>
 </body>
 </html>
