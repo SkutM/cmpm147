@@ -2,6 +2,8 @@
 // Author: Scott Miller
 // Date: 4/22/2025
 
+// p2_base
+
 /* exported preload, setup, draw, placeTile */
 
 /* global generateGrid drawGrid */
@@ -12,9 +14,7 @@ let currentGrid = [];
 let numRows, numCols;
 
 function preload() {
-  tilesetImage = loadImage(
-    "https://cdn.glitch.com/25101045-29e2-407a-894c-e0243cd8c7c6%2FtilesetP8.png?v=1611654020438"
-  );
+  tilesetImage = loadImage("img/tilesetP8.png");
 }
 
 function reseed() {
@@ -90,7 +90,7 @@ function placeTile(i, j, ti, tj) {
 }
 
 
-
+// p2_solution
 
 let currMode = "overworld";
 
