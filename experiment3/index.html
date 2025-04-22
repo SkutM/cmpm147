@@ -27,17 +27,17 @@
 
       <div class="minor-section">
         <h2>Description</h2>
-        <p>This experiment explores procedural worldbuilding using Perlin noise and random walk algorithms. The world can be toggled between a natural overworld and a dungeon interior, each with its own generative logic and decor.</p>
+        <p>In this experiment I made procedural tile worlds using Perlin noise and random walk algorithms. The world can be toggled between a procedural overworld and dungeon, with their own generative logic and decorations!</p>
       </div>
 
       <div class="minor-section">
         <h2>Technical</h2>
-        <p>The overworld uses Perlin noise for terrain generation. The dungeon is made of randomly placed rooms connected with hallways. Tiles are placed based on map context, and decorations are probabilistically chosen. Water and trees have dynamic animations using millis() and mouseX.</p>
+        <p>The overworld uses Perlin noise for terrain generation. The dungeon is made of randomly placed rooms connected with hallways. Water and trees have dynamic animations using millis() and mouseX.</p>
       </div>
 
       <div class="minor-section">
         <h2>Reflection</h2>
-        <p>I struggled with canvas rendering order and DOM targeting in setup(), especially when running on GitHub Pages. I learned how to delay canvas creation until elements are rendered. I also improved my grasp of 2D tile-based rendering and procedural logic.</p>
+        <p>I struggled with canvas rendering order and DOM targeting in setup(), especially when running on GitHub Pages. I did however improve my grasp of 2D tile rendering and procedural logic -- something I haven't really explored yet! The generator can be accessed here: https://glitch.com/edit/#!/polite-brick-shrew</p>
       </div>
     </section>
 
@@ -48,7 +48,6 @@
     </nav>
   </main>
 
-  <!-- ✅ Scripts go at the end so canvas-container is loaded first -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
   <script src="js/sketch.js"></script>
