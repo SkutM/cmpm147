@@ -1,69 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- This title is used for tabs and bookmarks -->
-	<title>Experiment X - Subject/Topic</title>
+	<title>Experiment X - Generative Overworld and Dungeon</title>
 
-	<!-- Use UTF character set, a good idea with any webpage -->
 	<meta charset="UTF-8" />
-	<!-- Set viewport so page remains consistently scaled w narrow devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
 	<link rel="stylesheet" type="text/css" href="../css/site.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<!-- Load jQuery library -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
         crossorigin="anonymous"></script>
-	<!-- Load p5.js library -->
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
 
-	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
-    <script type="text/javascript" src="../js/site.js" DEFER></script>
-	<!-- Use me for a JavaScript OOP Project -->
-	<script type="text/javascript" src="./js/project.js" DEFER></script>
-	<!-- Use me for a p5.js project -->
-	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+	<script type="text/javascript" src="../js/site.js" defer></script>
+	<script type="text/javascript" src="./js/project.js" defer></script>
+	<script type="text/javascript" src="./js/sketch.js" defer></script>
 </head>
 <body>
-	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment X - Generative Overworld and Dungeon</h1>
 
 			<div class="minor-section">
 				<div id="canvas-container">
-					<!-- canvas will be added here -->
+					<!-- Canvas is inserted here -->
 				</div>
-                <div class="fullscreen-box">
-                    <button id="fullscreen">Fullscreen</button>
-                </div>
+				<div class="fullscreen-box">
+					<button id="fullscreen">Fullscreen</button>
+				</div>
 			</div>
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>This experiment explores procedural worldbuilding using Perlin noise and random walk algorithms. The world can be toggled between two modes: a natural overworld and a dungeon interior. Each scene has its own generative logic, tileset, and decor logic for dynamic variation.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>
+					The overworld is generated using Perlin noise to create smooth transitions between water and grass, with added randomized visual variety like trees and rocks. The dungeon uses a room-and-hallway algorithm: several rooms are randomly placed, and hallways are carved to connect their centers.
+					<br><br>
+					Tiles are drawn using a tileset, and decor (trees, doors, rocks, etc.) is layered with probabilities. Life is added to the world through subtle animations: water tiles shimmer over time using `millis()`, and trees shift slightly based on `mouseX`.
+				</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>
+					I struggled a bit with the logic for drawing edge-based tiles and making sure wall tiles only spawn doors when touching floor tiles. I also had to figure out how to introduce "life" with mouse or time interaction, which ended up being fun and not too hard using `sin(millis())` and `map(mouseX)`. The project helped me better understand procedural generation and how to work with 2D arrays to render complex tilemaps.
+				</p>
 			</div>
 
 		</section>
 		<nav id="links" class="minor-section">
-			<!-- Put link back to homepage here. -->
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
 		</nav>
 	</main>
 </body>
