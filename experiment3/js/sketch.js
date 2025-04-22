@@ -57,6 +57,7 @@ function stringToGrid(str) {
 }
 
 function setup() {
+  console.log("canvasContainer:", select("#canvas-container"));
   numCols = select("#asciiBox").attribute("rows") | 0;
   numRows = select("#asciiBox").attribute("cols") | 0;
 
