@@ -14,6 +14,7 @@
     p3_drawAfter
 */
 
+let canvasContainer;
 let worldSeed;
 let clicks = {};
 let explosions = {};
