@@ -157,3 +157,46 @@ function drawSelectedTile(i, j) {
 }
 
 function drawAfter() {}
+
+function draw() {
+  drawBefore();
+  
+  let tw = tileWidth();
+  let th = tileHeight();
+  
+  let iCenter = int(-cameraOffsetY / th);
+  let jCenter = int(cameraOffsetX / tw);
+
+  let tilesAcross = int(width / tw) + 4;
+  let tilesDown = int(height / th) + 4;
+
+  for (let dj = -tilesAcross/2; dj < tilesAcross/2; dj++) {
+    for (let di = -tilesDown/2; di < tilesDown/2; di++) {
+      push();
+      let i = iCenter + di;
+      let j = jCenter + dj;
+      translate(j * tw - i * tw, i * th + j * th);
+      drawTile(i, j);
+      pop();
+    }
+  }
+
+  drawAfter();
+}
+
+// camera movement
+let cameraOffsetX = 0;
+let cameraOffsetY = 0;
+let cameraSpeed = 10;
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    cameraOffsetX -= cameraSpeed;
+  } else if (keyCode === RIGHT_ARROW) {
+    cameraOffsetX += cameraSpeed;
+  } else if (keyCode === UP_ARROW) {
+    cameraOffsetY -= cameraSpeed;
+  } else if (keyCode === DOWN_ARROW) {
+    cameraOffsetY += cameraSpeed;
+  }
+}
