@@ -36,6 +36,9 @@ function setup() {
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
   canvas.parent("canvas-container");
 
+  canvas.elt.tabIndex = '1'; 
+  canvas.elt.focus();        
+
   $(window).resize(function () {
     resizeScreen();
   });
@@ -226,6 +229,7 @@ function draw() {
 }
 
 function mousePressed() {
+  select('canvas').elt.focus();
   let tw = p3_tileWidth();
   let th = p3_tileHeight();
 
