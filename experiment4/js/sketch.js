@@ -223,11 +223,14 @@ function draw() {
   let tilesAcross = int(width / tw) + 4;
   let tilesDown = int(height / th) + 4;
 
+  let iCenter = int(-cameraOffsetY / th);
+  let jCenter = int(cameraOffsetX / tw);
+
   for (let dj = -tilesAcross/2; dj < tilesAcross/2; dj++) {
     for (let di = -tilesDown/2; di < tilesDown/2; di++) {
       push();
-      let i = di;
-      let j = dj;
+      let i = iCenter + di;
+      let j = jCenter + dj;
       translate(j * tw - i * tw, i * th + j * th);
       p3_drawTile(i, j);
       pop();
