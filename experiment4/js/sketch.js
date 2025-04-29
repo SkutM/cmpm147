@@ -1,15 +1,31 @@
-// sketch.js - Cosmic Space Infinite World
-// Author: Scott Miller
-// CMPM 147 - Experiment 4
+"use strict";
+
+/* global XXH */
+/* exported
+    p3_preload
+    p3_setup
+    p3_worldKeyChanged
+    p3_tileWidth
+    p3_tileHeight
+    p3_tileClicked
+    p3_drawBefore
+    p3_drawTile
+    p3_drawSelectedTile
+    p3_drawAfter
+*/
 
 let worldSeed;
 let clicks = {};
 let explosions = {};
 
-function preload() {
-}
+// camera setup
+let cameraOffsetX = 0;
+let cameraOffsetY = 0;
+let cameraSpeed = 20;
 
-function setup() {
+function p3_preload() {}
+
+function p3_setup() {
   canvasContainer = $("#canvas-container");
 
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
@@ -19,45 +35,58 @@ function setup() {
     resizeScreen();
   });
   resizeScreen();
+
+  // set key from input box
+  $("#set-key").click(function() {
+    let key = $("#world-key").val();
+    p3_worldKeyChanged(key);
+  });
+
+  // default key
+  p3_worldKeyChanged("default");
 }
 
 function resizeScreen() {
   resizeCanvas(canvasContainer.width(), canvasContainer.height());
 }
 
-function worldKeyChanged(key) {
+function p3_worldKeyChanged(key) {
   worldSeed = XXH.h32(key, 0);
   noiseSeed(worldSeed);
   randomSeed(worldSeed);
+  clicks = {};
+  explosions = {};
 }
 
-function tileWidth() {
+function p3_tileWidth() {
   return 64;
 }
-
-function tileHeight() {
+function p3_tileHeight() {
   return 32;
 }
 
-let [tw, th] = [tileWidth(), tileHeight()];
+let [tw, th] = [p3_tileWidth(), p3_tileHeight()];
 
-function tileClicked(i, j) {
+function p3_tileClicked(i, j) {
   let key = [i, j];
   let n = clicks[key] | 0;
 
   if (n == 0) {
-    clicks[key] = 1; // create planet
+    // make planet if no click on tile
+    clicks[key] = 1;
   } else {
-    delete clicks[key]; // remove planet
-    explosions[key] = millis(); // start explosion
+    // explode
+    delete clicks[key];
+    explosions[key] = millis();
   }
 }
 
-function drawBefore() {
-  // Background cosmic gradient
+function p3_drawBefore() {
+  // background
   setGradient(0, 0, width, height, color(10, 10, 30), color(40, 0, 60), color(0, 30, 60));
 }
 
+// gradient (directly from experiment 2)
 function setGradient(x, y, w, h, c1, c2, c3) {
   noFill();
   for (let i = y; i <= y + h; i++) {
@@ -69,14 +98,14 @@ function setGradient(x, y, w, h, c1, c2, c3) {
   }
 }
 
-function drawTile(i, j) {
+function p3_drawTile(i, j) {
   noStroke();
   push();
 
   let tileHash = XXH.h32("tile:" + [i, j], worldSeed).toNumber();
   randomSeed(tileHash);
 
-  let hasStar = random() < 0.25;
+  let hasStar = random() < 0.25; // 25% chance star
   if (hasStar) {
     let baseSize = random(1, 4);
     let twinkle = sin(millis() / 500 + i * 5 + j * 7) * 1.5;
@@ -87,30 +116,34 @@ function drawTile(i, j) {
     ellipse(0, 0, starSize, starSize);
   }
 
+  // If clicked, planet
   let n = clicks[[i, j]] | 0;
   if (n > 0) {
     let r = random(50, 80);
     let planetColor = color(random(100, 255), random(100, 255), random(100, 255));
 
+    // glow around a planet
     fill(red(planetColor), green(planetColor), blue(planetColor), 50);
     ellipse(0, 0, r * 1.5, r * 1.5);
 
+    // middle planet
     fill(planetColor);
     ellipse(0, 0, r, r);
 
+    // gpt help
+    // gpt start
+    // create surface of planet details
     for (let k = 0; k < 5; k++) {
       let angle = random(TWO_PI);
       let dist = random(r * 0.1, r * 0.4);
       let sx = cos(angle) * dist;
       let sy = sin(angle) * dist;
-      fill(
-        planetColor.levels[0] + random(-20, 20),
-        planetColor.levels[1] + random(-20, 20),
-        planetColor.levels[2] + random(-20, 20)
-      );
+      fill(planetColor.levels[0] + random(-20, 20), planetColor.levels[1] + random(-20, 20), planetColor.levels[2] + random(-20, 20));
       ellipse(sx, sy, random(5, 10), random(2, 5));
     }
+    // gpt end
 
+    // ring sometimes
     if (random() < 0.3) {
       noFill();
       stroke(255, 255, 150, 120);
@@ -119,18 +152,19 @@ function drawTile(i, j) {
     }
   }
 
-  if (explosions[[i, j]] !== undefined) {
-    let explosionStart = explosions[[i, j]];
-    let elapsed = millis() - explosionStart;
-    if (elapsed < 500) {
-      let numParticles = 8;
-      for (let k = 0; k < numParticles; k++) {
-        let angle = (TWO_PI / numParticles) * k;
-        let dist = elapsed / 5;
-        let px = cos(angle) * dist;
-        let py = sin(angle) * dist;
-        fill(255, 200, 0, 255 - elapsed);
-        ellipse(px, py, 5, 5);
+  // slight gpt help, noted below
+  if (explosions[[i, j]] !== undefined) { // gpt helped line
+    let explosionStart = explosions[[i, j]]; // mine
+    let elapsed = millis() - explosionStart; // mine
+    if (elapsed < 500) { // mine
+      let numParticles = 8; // mine
+      for (let k = 0; k < numParticles; k++) { // gpt
+        let angle = (TWO_PI / numParticles) * k; // gpt
+        let dist = elapsed / 5; // gpt
+        let px = cos(angle) * dist; // gpt
+        let py = sin(angle) * dist; // gpt
+        fill(255, 200, 0, 255 - elapsed); // mine (fades out)
+        ellipse(px, py, 5, 5); // gpt
       }
     } else {
       delete explosions[[i, j]];
@@ -140,7 +174,7 @@ function drawTile(i, j) {
   pop();
 }
 
-function drawSelectedTile(i, j) {
+function p3_drawSelectedTile(i, j) {
   noFill();
   stroke(0, 255, 0, 128);
 
@@ -152,20 +186,17 @@ function drawSelectedTile(i, j) {
   endShape(CLOSE);
 
   noStroke();
-  fill(255);
+  fill(0);
   text("tile " + [i, j], 0, 0);
 }
 
-function drawAfter() {}
+function p3_drawAfter() {}
 
 function draw() {
-  drawBefore();
-  
-  let tw = tileWidth();
-  let th = tileHeight();
-  
-  let iCenter = int(-cameraOffsetY / th);
-  let jCenter = int(cameraOffsetX / tw);
+  p3_drawBefore();
+
+  push();
+  translate(width/2 + cameraOffsetX, height/2 + cameraOffsetY);
 
   let tilesAcross = int(width / tw) + 4;
   let tilesDown = int(height / th) + 4;
@@ -173,30 +204,40 @@ function draw() {
   for (let dj = -tilesAcross/2; dj < tilesAcross/2; dj++) {
     for (let di = -tilesDown/2; di < tilesDown/2; di++) {
       push();
-      let i = iCenter + di;
-      let j = jCenter + dj;
+      let i = di;
+      let j = dj;
       translate(j * tw - i * tw, i * th + j * th);
-      drawTile(i, j);
+      p3_drawTile(i, j);
       pop();
     }
   }
 
-  drawAfter();
+  pop();
+
+  p3_drawAfter();
 }
 
-// camera movement
-let cameraOffsetX = 0;
-let cameraOffsetY = 0;
-let cameraSpeed = 10;
+function mousePressed() {
+  let tw = p3_tileWidth();
+  let th = p3_tileHeight();
+
+  let x = mouseX - width/2 - cameraOffsetX;
+  let y = mouseY - height/2 - cameraOffsetY;
+
+  let j = round((x / (2 * tw) + y / (2 * th)));
+  let i = round((y / (2 * th) - x / (2 * tw)));
+
+  p3_tileClicked(i, j);
+}
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-    cameraOffsetX -= cameraSpeed;
-  } else if (keyCode === RIGHT_ARROW) {
     cameraOffsetX += cameraSpeed;
+  } else if (keyCode === RIGHT_ARROW) {
+    cameraOffsetX -= cameraSpeed;
   } else if (keyCode === UP_ARROW) {
-    cameraOffsetY -= cameraSpeed;
-  } else if (keyCode === DOWN_ARROW) {
     cameraOffsetY += cameraSpeed;
+  } else if (keyCode === DOWN_ARROW) {
+    cameraOffsetY -= cameraSpeed;
   }
 }
