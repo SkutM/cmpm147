@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 4 - Infinite Worlds</title>
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 4 - Infinite Worlds: Cosmic Space</h1>
+
+      <div class="minor-section">
+        <div id="canvas-container" style="margin: 10px;"></div>
+      </div>
+
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>Explore an infinite cosmic world filled with twinkling stars, colorful planets, and dynamic explosions. Clicking generates planets; clicking again triggers a vibrant explosion.</p>
+      </div>
+
+      <div class="minor-section">
+        <h2>Technical</h2>
+        <p>This project uses p5.js with procedural generation. Every planet and star's position is determined by a key input. It uses per-tile seeding, time-based animations, and mouse click interactions.</p>
+      </div>
+
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>I learned how to combine random seed hashing and tile-based procedural generation to create a lively, infinite space. I also explored dynamic animations and user interactions to make the world feel alive.</p>
+      </div>
+    </section>
+
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/pierrec/js-xxhash/build/xxhash.min.js"></script>
+  <script src="js/sketch.js"></script>
+</body>
+</html>
