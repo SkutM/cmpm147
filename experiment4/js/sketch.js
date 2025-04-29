@@ -2,8 +2,8 @@
 
 /* global XXH */
 /* exported
-    p3_preload
-    p3_setup
+    preload
+    setup
     p3_worldKeyChanged
     p3_tileWidth
     p3_tileHeight
@@ -23,9 +23,9 @@ let cameraOffsetX = 0;
 let cameraOffsetY = 0;
 let cameraSpeed = 20;
 
-function p3_preload() {}
+function preload() {}
 
-function p3_setup() {
+function setup() {
   canvasContainer = $("#canvas-container");
 
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
