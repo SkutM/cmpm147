@@ -36,8 +36,11 @@ function setup() {
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
   canvas.parent("canvas-container");
 
-  canvas.elt.tabIndex = '1'; 
-  canvas.elt.focus();        
+  canvas.elt.tabIndex = '1'; // make canvas focusable
+
+  setTimeout(() => {
+    canvas.elt.focus();
+  }, 100);
 
   $(window).resize(function () {
     resizeScreen();
