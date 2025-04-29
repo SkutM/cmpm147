@@ -230,6 +230,7 @@ function mousePressed() {
   p3_tileClicked(i, j);
 }
 
+
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
     cameraOffsetX += cameraSpeed;
