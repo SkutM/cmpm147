@@ -24,9 +24,6 @@ let cameraOffsetX = 0;
 let cameraOffsetY = 0;
 let cameraSpeed = 20;
 
-// track held keys
-let keysDown = {};
-
 function preload() {}
 
 function setup() {
@@ -197,20 +194,6 @@ function p3_drawSelectedTile(i, j) {
 function p3_drawAfter() {}
 
 function draw() {
-  // camera movement while holding keys
-  if (keysDown[LEFT_ARROW]) {
-    cameraOffsetX += cameraSpeed;
-  }
-  if (keysDown[RIGHT_ARROW]) {
-    cameraOffsetX -= cameraSpeed;
-  }
-  if (keysDown[UP_ARROW]) {
-    cameraOffsetY += cameraSpeed;
-  }
-  if (keysDown[DOWN_ARROW]) {
-    cameraOffsetY -= cameraSpeed;
-  }
-
   p3_drawBefore();
 
   push();
@@ -248,10 +231,15 @@ function mousePressed() {
   p3_tileClicked(i, j);
 }
 
-function keyPressed() {
-  keysDown[keyCode] = true;
-}
 
-function keyReleased() {
-  keysDown[keyCode] = false;
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    cameraOffsetX += cameraSpeed;
+  } else if (keyCode === RIGHT_ARROW) {
+    cameraOffsetX -= cameraSpeed;
+  } else if (keyCode === UP_ARROW) {
+    cameraOffsetY += cameraSpeed;
+  } else if (keyCode === DOWN_ARROW) {
+    cameraOffsetY -= cameraSpeed;
+  }
 }
