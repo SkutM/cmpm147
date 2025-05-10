@@ -34,7 +34,7 @@ function inspirationChanged(nextInspiration) {
 }
 
 function setup() {
-  currentCanvas = createCanvas(600, 400, { willReadFrequently: true });
+  currentCanvas = createCanvas(400, 266, { willReadFrequently: true });
   currentCanvas.parent(document.getElementById("canvas-container"));
   currentScore = Number.NEGATIVE_INFINITY;
   currentDesign = initDesign(currentInspiration);
@@ -43,6 +43,7 @@ function setup() {
   loadPixels();
   currentInspirationPixels = pixels;
 }
+
 
 function evaluate() {
   loadPixels();
