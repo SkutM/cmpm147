@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 5 - Evolutionary Impressions</title>
+  <link rel="stylesheet" href="../css/site.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="content">
+    <section>
+      <h1>Experiment 5 - Evolutionary Impressions</h1>
+
+      <div class="minor-section">
+        <div id="canvas-container" style="margin: 10px;">
+          <select id="dropper"></select>
+          <button id="restart">Restart</button>
+          <p>Mutation rate (<span id="rate"></span>%): 
+            <input id="slider" type="range" min="1" max="100" value="100" />
+          </p>
+          <p>Active score: <span id="activeScore"></span></p>
+          <p>Best score: <span id="bestScore"></span></p>
+          <p>Exploration rate: <span id="fpsCounter"></span> fps</p>
+          <p id="memory" data-max-items="16"></p>
+        </div>
+      </div>
+
+      <div class="minor-section">
+        <h2>Description</h2>
+        <p>This project evolves a set of geometric shapes to approximate a selected background image using mutation and rendering strategies. Users can control the mutation rate and restart the evolutionary process with new inspirations.</p>
+      </div>
+
+      <div class="minor-section">
+        <h2>Reflection</h2>
+        <p>I learned how to combine evolutionary mutation strategies with visual rendering, creating a system that blends randomness and control. This project taught me to separate data generation from drawing, resulting in an evolving generative artwork.</p>
+      </div>
+
+      <nav id="links" class="minor-section">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+        </ul>
+      </nav>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <script src="js/sketch.js"></script>
+</body>
+</html>
