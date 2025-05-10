@@ -9,41 +9,44 @@
 </head>
 <body>
   <main id="content">
-    <section>
-      <h1>Experiment 5 - Evolutionary Impressions</h1>
+  <section>
+    <h1>Experiment 5 - Evolutionary Impressions</h1>
 
-      <div class="minor-section">
-        <div id="canvas-container" style="margin: 10px;">
-          <select id="dropper"></select>
-          <button id="restart">Restart</button>
-          <p>Mutation rate (<span id="rate">100</span>%): 
-            <input id="slider" type="range" min="1" max="100" value="100" />
-          </p>
-          <p>Active score: <span id="activeScore">0</span></p>
-          <p>Best score: <span id="bestScore">0</span></p>
-          <p>Exploration rate: <span id="fpsCounter">0</span> fps</p>
-          <div id="best"></div>
-          <div id="memory" data-max-items="16"></div>
-        </div>
+    <!-- FIRST: canvas + controls -->
+    <div class="minor-section">
+      <div id="canvas-container" style="margin: 10px; max-width: 400px;">
+        <select id="dropper"></select>
+        <button id="restart">Restart</button>
+        <p>Mutation rate (<span id="rate">100</span>%): 
+          <input id="slider" type="range" min="1" max="100" value="100" />
+        </p>
+        <p>Active score: <span id="activeScore">0</span></p>
+        <p>Best score: <span id="bestScore">0</span></p>
+        <p>Exploration rate: <span id="fpsCounter">0</span> fps</p>
+        <div id="best"></div>
+        <div id="memory" data-max-items="16"></div>
       </div>
+    </div>
 
-      <div class="minor-section">
-        <h2>Description</h2>
-        <p>This project evolves a set of geometric shapes to approximate a selected background image using mutation and rendering strategies. Users can control the mutation rate and restart the evolutionary process with new inspirations.</p>
-      </div>
+    <!-- SECOND: description + reflection (pushed lower) -->
+    <div class="minor-section">
+      <h2>Description</h2>
+      <p>This project evolves a set of geometric shapes to approximate a selected background image using mutation and rendering strategies. Users can control the mutation rate and restart the evolutionary process with new inspirations.</p>
+    </div>
 
-      <div class="minor-section">
-        <h2>Reflection</h2>
-        <p>I learned how to combine evolutionary mutation strategies with visual rendering, creating a system that blends randomness and control. This project taught me to separate data generation from drawing, resulting in an evolving generative artwork.</p>
-      </div>
+    <div class="minor-section">
+      <h2>Reflection</h2>
+      <p>I learned how to combine evolutionary mutation strategies with visual rendering, creating a system that blends randomness and control. This project taught me to separate data generation from drawing, resulting in an evolving generative artwork.</p>
+    </div>
 
-      <nav id="links" class="minor-section">
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-        </ul>
-      </nav>
-    </section>
-  </main>
+    <nav id="links" class="minor-section">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </nav>
+  </section>
+</main>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
   <script src="js/sketch.js"></script>
